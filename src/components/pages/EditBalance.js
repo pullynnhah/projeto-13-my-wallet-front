@@ -21,8 +21,12 @@ export default function EditBalance() {
 
   async function submitForm(event) {
     event.preventDefault();
-    await editTransaction({...form, type}, login.token);
-    navigate("/wallet");
+    try {
+      await editTransaction({...form, type}, login.token);
+      navigate("/wallet");
+    } catch (e) {
+      alert("Verifique seus dados!");
+    }
   }
 
   return (

@@ -20,8 +20,12 @@ export default function NewBalance() {
   const navigate = useNavigate();
   async function submitForm(event) {
     event.preventDefault();
-    await makeTransaction({...form, type}, login.token);
-    navigate("/wallet");
+    try {
+      await makeTransaction({...form, type}, login.token);
+      navigate("/wallet");
+    } catch (e) {
+      alert("Verifique seus dados!");
+    }
   }
 
   return (
