@@ -30,10 +30,16 @@ function makeTransaction(data, token) {
   });
 }
 
-function editTransaction(data, token) {
+function editTransaction(data, walletId, token) {
   return axios.put(`${process.env.REACT_APP_API}/transaction`, data, {
-    headers: {Authorization: `Bearer ${token}`},
+    headers: {Authorization: `Bearer ${token}`, Wallet: walletId},
   });
 }
 
-export {login, signup, logout, makeTransaction, editTransaction, listTransactions};
+function delTransaction(walletId, token) {
+  return axios.delete(`${process.env.REACT_APP_API}/transaction`, {
+    headers: {Authorization: `Bearer ${token}`, Wallet: walletId},
+  });
+}
+
+export {login, signup, logout, makeTransaction, editTransaction, listTransactions, delTransaction};

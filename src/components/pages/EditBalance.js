@@ -1,5 +1,5 @@
 import {useContext, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 import GlobalContext from "../contexts/GlobalContext";
 import Form from "../styles/Form.sc";
@@ -7,9 +7,10 @@ import BalanceTitle from "../styles/BalanceTitle.sc";
 import {editTransaction} from "../../services/api";
 
 export default function EditBalance() {
+  const {state} = useLocation();
   const {login} = useContext(GlobalContext);
   const {type} = useParams();
-  const [form, setForm] = useState({amount: "", description: ""});
+  const [form, setForm] = useState({amount: state.amount, description: state.description});
 
   const title = type === "income" ? "entrada" : "saída";
   const inputs = [
@@ -22,7 +23,7 @@ export default function EditBalance() {
   async function submitForm(event) {
     event.preventDefault();
     try {
-      await editTransaction({...form, type}, login.token);
+      await editTransaction({...form, type}, state.walletId, login.token);
       navigate("/wallet");
     } catch (e) {
       alert("Verifique seus dados!");
@@ -38,6 +39,8 @@ export default function EditBalance() {
             key={index}
             placeholder={input.placeholder}
             type={"text"}
+            value={form[input.name]}
+            name={input.name}
             onChange={e => setForm({...form, [e.target.name]: e.target.value})}
             required
           />
