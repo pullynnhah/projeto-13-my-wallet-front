@@ -5,9 +5,11 @@ import {ThemeProvider} from "styled-components";
 import {GlobalStyle} from "./styles/GlobalStyle.sc";
 import GlobalContext from "./contexts/GlobalContext";
 import {getMyWalletUser} from "../services/storage";
+import Login from "./pages/Login";
 
 export default function App() {
   const [login, setLogin] = useState(getMyWalletUser());
+  const [token, setToken] = useState(null);
   const theme = {
     purple: "#8C11BE",
     violet: "#A328D6",
@@ -22,7 +24,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <GlobalContext.Provider value={{login, setLogin, theme}}>
+      <GlobalContext.Provider value={{login, setLogin, token, setToken}}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
