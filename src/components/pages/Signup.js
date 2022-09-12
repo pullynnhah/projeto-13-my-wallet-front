@@ -1,32 +1,35 @@
-import {useContext, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
-import axios from "axios";
+import {useState} from "react";
 
-import GlobalContext from "../contexts/GlobalContext";
 import Title from "../styles/Title.sc";
+import {Link, useNavigate} from "react-router-dom";
 import Linker from "../styles/Linker.sc";
 import Form from "../styles/Form.sc";
+import axios from "axios";
 
-export default function Login() {
-  const {setToken} = useContext(GlobalContext);
-  const [form, setForm] = useState({email: "", password: ""});
-
-  const navigate = useNavigate();
+export default function Signup() {
+  const [form, setForm] = useState({name: "", email: "", password: "", repeatPassword: ""});
   const inputs = [
+    {placeholder: "Nome", type: "text", name: "name"},
     {placeholder: "E-mail", type: "email", name: "email"},
     {placeholder: "Senha", type: "password", name: "password"},
+    {placeholder: "Confirme a senha", type: "password", name: "repeatPassword"},
   ];
 
+  const navigate = useNavigate();
   async function submitForm(event) {
     event.preventDefault();
+    if (form.password !== form.repeatPassword) {
+      alert("As senhas não coincidem");
+      return;
+    }
 
     try {
-      const token = await axios.post(`${process.env.REACT_APP_API}/login`, form);
-      setToken(token);
-      navigate("/wallet");
+      await axios.post(`${process.env.REACT_APP_API}/signup`, form);
+      navigate("/");
     } catch (e) {
       alert("Verifique seus dados!");
     }
+    console.log(form);
   }
 
   return (
@@ -44,10 +47,10 @@ export default function Login() {
             required
           />
         ))}
-        <button type={"submit"}>Entrar</button>
+        <button type={"submit"}>Cadastrar</button>
       </Form>
       <Linker>
-        <Link to={"/signup"}>Primeira vez? Cadastre-se!</Link>
+        <Link to={"/"}>Já tem uma conta? Entre agora!</Link>
       </Linker>
     </>
   );

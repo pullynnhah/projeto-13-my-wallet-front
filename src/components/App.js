@@ -6,6 +6,7 @@ import {GlobalStyle} from "./styles/GlobalStyle.sc";
 import GlobalContext from "./contexts/GlobalContext";
 import {getMyWalletUser} from "../services/storage";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 export default function App() {
   const [login, setLogin] = useState(getMyWalletUser());
@@ -28,7 +29,7 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
-            {/*<Route path="/sign-up" element={<SignUp />} />*/}
+            <Route path="/signup" element={<Signup />} />
             {/*<Route path="/my-wallet" element={<MyWallet />} />*/}
             {/*<Route path="/balance/new/:type" element={<NewBalance />} />*/}
             {/*<Route path="/balance/edit/:type" element={<EditBalance />} />*/}
