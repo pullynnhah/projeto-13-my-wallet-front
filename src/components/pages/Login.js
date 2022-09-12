@@ -24,7 +24,7 @@ export default function Login() {
     try {
       const {data} = await axios.post(`${process.env.REACT_APP_API}/login`, form);
       setLogin(data);
-      setMyWalletUser(data.token);
+      setMyWalletUser(data);
       navigate("/wallet");
     } catch (e) {
       alert("Verifique seus dados!");

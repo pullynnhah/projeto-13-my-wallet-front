@@ -7,6 +7,7 @@ import GlobalContext from "./contexts/GlobalContext";
 import {getMyWalletUser} from "../services/storage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Wallet from "./pages/Wallet";
 
 export default function App() {
   const [login, setLogin] = useState(getMyWalletUser());
@@ -29,7 +30,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            {/*<Route path="/my-wallet" element={<MyWallet />} />*/}
+            <Route path="/wallet" element={<Wallet />} />
             {/*<Route path="/balance/new/:type" element={<NewBalance />} />*/}
             {/*<Route path="/balance/edit/:type" element={<EditBalance />} />*/}
           </Routes>

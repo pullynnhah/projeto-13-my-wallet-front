@@ -1,13 +1,15 @@
 import {useContext} from "react";
-import {RiLogoutBoxRLine} from "react-icons/ri";
-import GlobalContext from "../contexts/GlobalContext";
-import {FiPlusCircle, FiMinusCircle} from "react-icons/fi";
-import Page from "../styles/Page.sc";
 import {Link} from "react-router-dom";
+import {RiLogoutBoxRLine} from "react-icons/ri";
+import {FiPlusCircle, FiMinusCircle} from "react-icons/fi";
 
-export default function MyWallet() {
+import GlobalContext from "../contexts/GlobalContext";
+import Page from "../styles/Page.sc";
+
+export default function Wallet() {
   const {login} = useContext(GlobalContext);
 
+  console.log(login);
   return (
     <Page>
       <h1>Olá, {login.name}</h1>
