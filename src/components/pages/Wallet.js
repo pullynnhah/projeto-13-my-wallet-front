@@ -6,6 +6,7 @@ import {FiPlusCircle, FiMinusCircle} from "react-icons/fi";
 import GlobalContext from "../contexts/GlobalContext";
 import Page from "../styles/Page.sc";
 import {logout} from "../../services/api";
+import Transactions from "../Transactions";
 
 export default function Wallet() {
   const {login} = useContext(GlobalContext);
@@ -28,7 +29,10 @@ export default function Wallet() {
       <h1>Olá, {login.name}</h1>
       <RiLogoutBoxRLine className={"icon"} onClick={exit} />
 
-      <div></div>
+      <div className="entries">
+        <Transactions />
+      </div>
+
       <Link to={"/balance/new/income"}>
         <button>
           <FiPlusCircle className={"icon"} />

@@ -18,6 +18,12 @@ function logout(token) {
   );
 }
 
+function listTransactions(token) {
+  return axios.get(`${process.env.REACT_APP_API}/transaction`, {
+    headers: {Authorization: `Bearer ${token}`},
+  });
+}
+
 function makeTransaction(data, token) {
   return axios.post(`${process.env.REACT_APP_API}/transaction`, data, {
     headers: {Authorization: `Bearer ${token}`},
@@ -30,4 +36,4 @@ function editTransaction(data, token) {
   });
 }
 
-export {login, signup, logout, makeTransaction, editTransaction};
+export {login, signup, logout, makeTransaction, editTransaction, listTransactions};

@@ -23,7 +23,8 @@ const Page = styled.main`
     color: ${props => props.theme.white};
     font-size: 24px;
   }
-  div {
+
+  .entries {
     grid-area: entries;
     background-color: ${props => props.theme.white};
     height: calc(100vh - 220px);

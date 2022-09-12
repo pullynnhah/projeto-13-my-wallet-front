@@ -19,7 +19,7 @@ export default function App() {
     green: "#03AC00",
     red: "#C70000",
     gray: "#868686",
-    lighGray: "#C6C6C6",
+    lightGray: "#C6C6C6",
     black: "#000",
     white: "#FFF",
   };
