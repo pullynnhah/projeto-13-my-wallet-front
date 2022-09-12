@@ -1,15 +1,14 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import axios from "axios";
 
 import GlobalContext from "../contexts/GlobalContext";
 import Title from "../styles/Title.sc";
 import Linker from "../styles/Linker.sc";
 import Form from "../styles/Form.sc";
-import {setMyWalletUser} from "../../services/storage";
+import {login} from "../../services/api";
 
 export default function Login() {
-  const {login, setLogin} = useContext(GlobalContext);
+  const {setLogin} = useContext(GlobalContext);
   const [form, setForm] = useState({email: "", password: ""});
 
   const navigate = useNavigate();
@@ -22,20 +21,13 @@ export default function Login() {
     event.preventDefault();
 
     try {
-      const {data} = await axios.post(`${process.env.REACT_APP_API}/login`, form);
+      const {data} = await login(form);
       setLogin(data);
-      setMyWalletUser(data);
       navigate("/wallet");
     } catch (e) {
       alert("Verifique seus dados!");
     }
   }
-
-  useEffect(() => {
-    if (login !== null) {
-      navigate("/wallet");
-    }
-  }, []);
 
   return (
     <>

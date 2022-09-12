@@ -4,7 +4,7 @@ import Title from "../styles/Title.sc";
 import {Link, useNavigate} from "react-router-dom";
 import Linker from "../styles/Linker.sc";
 import Form from "../styles/Form.sc";
-import axios from "axios";
+import {signup} from "../../services/api";
 
 export default function Signup() {
   const [form, setForm] = useState({name: "", email: "", password: "", repeatPassword: ""});
@@ -24,7 +24,7 @@ export default function Signup() {
     }
 
     try {
-      await axios.post(`${process.env.REACT_APP_API}/signup`, form);
+      await signup(form);
       navigate("/");
     } catch (e) {
       alert("Verifique seus dados!");
